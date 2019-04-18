@@ -1,14 +1,14 @@
 import schema from "../graphql";
 import mongoose from "mongoose";
 import { GraphQLServer, PubSub } from "graphql-yoga";
-import { models } from "../db";
+import { models } from "../models";
 
 const pubsub = new PubSub();
 
 const db = 'mongodb://localhost:27017/devfriend'
 
 const options = {
-  port: "3001", //process.env.PORT || "4000",
+  port: "4000", //process.env.PORT || "4000",
   endpoint: "/graphql"
 };
 
