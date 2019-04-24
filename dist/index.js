@@ -1,27 +1,41 @@
 "use strict";
 
-var express = require('express');
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var express_graphql = require('express-graphql');
+var _graphql = _interopRequireDefault(require("./graphql"));
 
-var _require = require('graphql'),
-    buildSchema = _require.buildSchema; // GraphQL schema
+var _mongoose = _interopRequireDefault(require("mongoose"));
 
+var _graphqlYoga = require("graphql-yoga");
 
-var schema = buildSchema("\n    type Query {\n        message: String\n    }\n"); // Root resolver
+var _models = require("./models");
 
-var root = {
-  message: function message() {
-    return 'Hello World!';
-  }
-}; // Create an express server and a GraphQL endpoint
+var pubsub = new _graphqlYoga.PubSub(); //const db = 'mongodb://db_owner:alexandros2911!@ds026018.mlab.com:26018/devfriend'
 
-var app = express();
-app.use('/graphql', express_graphql({
-  schema: schema,
-  rootValue: root,
-  graphiql: true
-}));
-app.listen(4000, function () {
-  return console.log('Express GraphQL Server Now Running On localhost:4000/graphql');
+var db = 'mongodb://localhost:27017/devfriend';
+var options = {
+  port: process.env.PORT || "4000",
+  endpoint: "/graphql"
+};
+var context = {
+  models: _models.models,
+  pubsub: pubsub
+}; // Connect to MongoDB with Mongoose.
+
+_mongoose["default"].connect(db, {
+  useCreateIndex: true,
+  useNewUrlParser: true
+}).then(function () {
+  return console.log("MongoDB connected");
+})["catch"](function (err) {
+  return console.log(err);
+});
+
+var server = new _graphqlYoga.GraphQLServer({
+  schema: _graphql["default"],
+  context: context
+});
+server.start(options, function (_ref) {
+  var port = _ref.port;
+  console.log("\uD83D\uDE80 Server is running on http://localhost:".concat(port));
 });

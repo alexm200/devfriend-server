@@ -2,13 +2,13 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _graphql = _interopRequireDefault(require("../graphql"));
+var _graphql = _interopRequireDefault(require("./graphql"));
 
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
 var _graphqlYoga = require("graphql-yoga");
 
-var _models = require("../models");
+var _models = require("./models");
 
 var pubsub = new _graphqlYoga.PubSub();
 var db = 'mongodb://db_owner:alexandros2911!@ds026018.mlab.com:26018/devfriend';
