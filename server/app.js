@@ -115,4 +115,4 @@ const dbConnectAndStartServer = async () => {
 };
 
 // Entry point
-dbConnectAndStartServer();
+//dbConnectAndStartServer();
