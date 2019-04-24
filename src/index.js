@@ -5,8 +5,8 @@ import { models } from "./models";
 
 const pubsub = new PubSub();
 
-//const db = 'mongodb://db_owner:alexandros2911!@ds026018.mlab.com:26018/devfriend'
-const db = 'mongodb://localhost:27017/devfriend'
+const db = 'mongodb://db_owner:alexandros2911!@ds026018.mlab.com:26018/devfriend'
+//const db = 'mongodb://localhost:27017/devfriend'
 
 const options = {
   port: process.env.PORT || "4000",
