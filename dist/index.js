@@ -10,9 +10,9 @@ var _graphqlYoga = require("graphql-yoga");
 
 var _models = require("./models");
 
-var pubsub = new _graphqlYoga.PubSub(); //const db = 'mongodb://db_owner:alexandros2911!@ds026018.mlab.com:26018/devfriend'
+var pubsub = new _graphqlYoga.PubSub();
+var db = 'mongodb://ds026658.mlab.com:26658/devfriend'; //const db = 'mongodb://localhost:27017/devfriend'
 
-var db = 'mongodb://localhost:27017/devfriend';
 var options = {
   port: process.env.PORT || "4000",
   endpoint: "/graphql"
@@ -24,7 +24,9 @@ var context = {
 
 _mongoose["default"].connect(db, {
   useCreateIndex: true,
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  user: "dbAdmin",
+  pass: "a12345"
 }).then(function () {
   return console.log("MongoDB connected");
 })["catch"](function (err) {

@@ -5,7 +5,7 @@ import { models } from "./models";
 
 const pubsub = new PubSub();
 
-const db = 'mongodb://db_owner:alexandros2911!@ds026018.mlab.com:26018/devfriend'
+const db = 'mongodb://ds026658.mlab.com:26658/devfriend'
 //const db = 'mongodb://localhost:27017/devfriend'
 
 const options = {
@@ -24,7 +24,9 @@ mongoose
     db,
     {
       useCreateIndex: true,
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      user: "dbAdmin",
+      pass: "a12345"        
     }
   )
   .then(() => console.log("MongoDB connected"))
