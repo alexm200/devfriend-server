@@ -1,39 +1,21 @@
-import schema from "../graphql";
-import mongoose from "mongoose";
-import { GraphQLServer, PubSub } from "graphql-yoga";
-import { models } from "../models";
-
-const pubsub = new PubSub();
-
-const db = 'mongodb://localhost:27017/devfriend'
-
-const options = {
-  port: process.env.PORT || "4000",
-  endpoint: "/graphql"
-};
-
-const context = {
-  models,
-  pubsub
-};
-
-// Connect to MongoDB with Mongoose.
-mongoose
-  .connect(
-    db,
-    {
-      useCreateIndex: true,
-      useNewUrlParser: true
+var express = require('express');
+var express_graphql = require('express-graphql');
+var { buildSchema } = require('graphql');
+// GraphQL schema
+var schema = buildSchema(`
+    type Query {
+        message: String
     }
-  )
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
-
-const server = new GraphQLServer({
-  schema,
-  context
-});
-
-server.start(options, ({ port }) => {
-  console.log(`🚀 Server is running on http://localhost:${port}`);
-});
+`);
+// Root resolver
+var root = {
+    message: () => 'Hello World!'
+};
+// Create an express server and a GraphQL endpoint
+var app = express();
+app.use('/graphql', express_graphql({
+    schema: schema,
+    rootValue: root,
+    graphiql: true
+}));
+app.listen(4000, () => console.log('Express GraphQL Server Now Running On localhost:4000/graphql'));
