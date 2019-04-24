@@ -5,8 +5,7 @@ import { models } from "./models";
 
 const pubsub = new PubSub();
 
-const db = 'mongodb://ds026658.mlab.com:26658/devfriend'
-//const db = 'mongodb://localhost:27017/devfriend'
+const db = `mongodb://${process.env.MONGO_URL }/${process.env.DB_NAME}`
 
 const options = {
   port: process.env.PORT || "4000",
@@ -25,8 +24,8 @@ mongoose
     {
       useCreateIndex: true,
       useNewUrlParser: true,
-      user: "dbAdmin",
-      pass: "a12345"        
+      user: process.env.MONGO_USER,
+      pass: process.env.MONGO_PASSWORD        
     }
   )
   .then(() => console.log("MongoDB connected"))
