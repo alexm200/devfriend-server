@@ -13,8 +13,7 @@ var _models = require("../models");
 var pubsub = new _graphqlYoga.PubSub();
 var db = 'mongodb://localhost:27017/devfriend';
 var options = {
-  port: "4000",
-  //process.env.PORT || "4000",
+  port: process.env.PORT || "4000",
   endpoint: "/graphql"
 };
 var context = {
