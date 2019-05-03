@@ -9,12 +9,10 @@ const cors = require('cors');
 
 const pubsub = new PubSub();
 
-//const db = `mongodb://${process.env.MONGO_URL || "ds026658.mlab.com:26658" }/${process.env.DB_NAME || "devfriend"}`
-const db = `mongodb://ds026658.mlab.com:26658/devfriend`;
+const db = `mongodb://${process.env.MONGO_URL || "localhost:27017" }/${process.env.DB_NAME || "devfriend"}`
 
 const options = {
-  port: "4000",
-  //port: process.env.PORT || "4000",
+  port: process.env.PORT || "4001",
   endpoint: "/graphql"     
 };
 
@@ -30,8 +28,8 @@ mongoose
     {
       useCreateIndex: true,
       useNewUrlParser: true,
-      user: "dbAdmin",// process.env.MONGO_USER,
-      pass: "a12345"//process.env.MONGO_PASSWORD        
+      user: process.env.MONGO_USER,
+      pass: process.env.MONGO_PASSWORD        
     }
   )
   .then(() => console.log("MongoDB connected"))
