@@ -11,7 +11,7 @@ var _graphqlYoga = require("graphql-yoga");
 var _models = require("./models");
 
 var pubsub = new _graphqlYoga.PubSub();
-var db = "mongodb://".concat(process.env.MONGO_URL, "/").concat(process.env.DB_NAME);
+var db = "mongodb://".concat(process.env.MONGO_URL || "localhost:27017", "/").concat(process.env.DB_NAME || "devfriend");
 var options = {
   port: process.env.PORT || "4000",
   endpoint: "/graphql"

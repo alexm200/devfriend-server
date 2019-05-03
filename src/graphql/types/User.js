@@ -1,4 +1,7 @@
-export default `
+
+const { gql } = require("apollo-server");
+
+export default gql`
   type User {
     _id: String!
     username: String!
@@ -12,6 +15,7 @@ export default `
     createUser(user: CreateUserInput): User!
     updateUser(_id: String!, user: UpdateUserInput!): User!
     deleteUser(_id: String!): User!
+    deleteUsers: Boolean
   }
   input CreateUserInput {
     username: String!

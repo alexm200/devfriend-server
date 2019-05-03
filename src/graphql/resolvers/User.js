@@ -46,6 +46,13 @@ export default {
           err ? reject(err) : resolve(res);
         });
       });
+    },
+    deleteUsers: async(parent, args, context, info) => {
+      return new Promise((resolve, reject) => {
+        User.deleteMany().exec((err, res) => {          
+          err ? reject(err) : resolve(res.ok);
+        });
+      });
     }
   }
 };
