@@ -8,7 +8,8 @@ export default gql`
     password: String!   
   }
   type Query {
-    user(_id: ID!): User!
+    user(username: String!, password: String!): User
+    userById(_id: ID!): User!
     users: [User!]!
   }
   type Mutation {

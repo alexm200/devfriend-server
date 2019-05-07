@@ -3,7 +3,10 @@ import User from "../../models/User";
 
 export default {
   Query: {
-    user: async (parent, { _id }, context, info) => {
+    user: async (parent, { username, password }, context, info) => {      
+      return await User.findOne({ "username": username, "password": password }).exec();
+    },
+    userById: async (parent, { _id }, context, info) => {
       return await User.findOne({ _id }).exec();
     },
     users: async (parent, args, context, info) => {

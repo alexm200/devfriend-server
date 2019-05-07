@@ -12,7 +12,7 @@ const pubsub = new PubSub();
 const db = `mongodb://${process.env.MONGO_URL || "localhost:27017" }/${process.env.DB_NAME || "devfriend"}`
 
 const options = {
-  port: process.env.PORT || "4001",
+  port: process.env.PORT || "4000",
   endpoint: "/graphql"     
 };
 
