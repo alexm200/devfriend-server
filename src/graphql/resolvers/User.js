@@ -6,6 +6,9 @@ export default {
     user: async (parent, { username, password }, context, info) => {      
       return await User.findOne({ "username": username, "password": password }).exec();
     },
+    userByUsername: async (parent, { username }, context, info) => {
+      return await User.findOne({ "username": username }).exec();
+    },    
     userById: async (parent, { _id }, context, info) => {
       return await User.findOne({ _id }).exec();
     },

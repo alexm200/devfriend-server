@@ -9,6 +9,7 @@ export default gql`
   }
   type Query {
     user(username: String!, password: String!): User
+    userByUsername(username: String!): User
     userById(_id: ID!): User!
     users: [User!]!
   }
