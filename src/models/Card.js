@@ -23,7 +23,11 @@ const CardSchema = new Schema({
     text: {
         type: String,    
         required: false
-    }
+    },
+    date_created: {
+        type: Date,
+        required: true
+    }    
 });
 
 export default mongoose.model("Card", CardSchema);

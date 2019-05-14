@@ -1,13 +1,15 @@
-
 const { gql } = require("apollo-server");
 
+
 export default gql`
+  scalar DateTime
   type Card {
     _id: String!
     category: String!
     user_id: String!
     title: String
-    text: String   
+    text: String
+    date_created: DateTime!
   }
   type Query {
     cardsByCategory(user_id: String!, category: String!): [Card]
@@ -24,9 +26,14 @@ export default gql`
     category: String!
     title: String
     text: String
+    date_created: DateTime!
   }
   input UpdateCardInput {
+    _id: String!
+    user_id: String!
+    category: String!
     title: String
     text: String
+    date_created: DateTime!
   }
 `;

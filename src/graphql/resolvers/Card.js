@@ -3,31 +3,19 @@ import Card from "../../models/Card";
 
 export default {
   Query: {    
-    cards: async (parent, args, context, info) => {
-      const cards = await Card.find({})
+    cards: async (parent, args, context, info) => {      
+      const cards = await Card.find({}).sort({ date_created: -1 })
         .populate()
         .exec();
 
-      return cards.map(i => ({
-        _id: i._id.toString(),
-        user_id: i.user_id.toString(),
-        category: i.category,
-        title: i.title,
-        text: i.text
-      }));
+      return cards;
     },
     cardsByCategory: async (parent, { category }, context, info) => {
-        const cards = await Card.find({ "category": category })
+        const cards = await Card.find({ "category": category }).sort({ date_created: -1 })
           .populate()
           .exec();
-  
-        return cards.map(i => ({
-          _id: i._id.toString(),
-          user_id: i.user_id.toString(),
-          category: i.category,
-          title: i.title,
-          text: i.text
-        }));
+      
+        return cards;
       }    
   },
   Mutation: {
@@ -36,7 +24,8 @@ export default {
         user_id: card.user_id,
         category: card.category,
         title: card.title,
-        text: card.text
+        text: card.text,
+        date_created: card.date_created
       });
 
       return new Promise((resolve, reject) => {
@@ -47,7 +36,7 @@ export default {
     },
     updateCard: async (parent, { _id, card }, context, info) => {
       return new Promise((resolve, reject) => {
-        Card.findByIdAndUpdate(_id, { $set: { ...card } }, { new: true }).exec(
+        Card.findByIdAndUpdate(_id, { $set: { ...card } }, { new: true, useFindAndModify: false }).exec(
           (err, res) => {
             err ? reject(err) : resolve(res);
           }
