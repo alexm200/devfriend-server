@@ -25,12 +25,15 @@ export default gql`
     userId: String
     category: String    
     title: String
-    text: String    
+    text: String
+    dateCreated: DateTime
   }  
   input CardInput {
+    _id: String
     userId: String
     category: String
     title: String
-    text: String    
+    text: String
+    dateCreated: DateTime
   }
 `;
