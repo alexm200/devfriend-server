@@ -11,7 +11,11 @@ var _mergeGraphqlSchemas = require("merge-graphql-schemas");
 
 var _User = _interopRequireDefault(require("./User"));
 
-var typeDefs = [_User["default"]];
+var _Card = _interopRequireDefault(require("./Card"));
+
+var _MenuItem = _interopRequireDefault(require("./MenuItem"));
+
+var typeDefs = [_User["default"], _Card["default"], _MenuItem["default"]];
 
 var _default = (0, _mergeGraphqlSchemas.mergeTypes)(typeDefs, {
   all: true

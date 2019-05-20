@@ -2,10 +2,12 @@ import schema from "./graphql";
 import mongoose from "mongoose";
 import { GraphQLServer, PubSub } from "graphql-yoga";
 import { models } from "./models";
+import { SDKCreator } from "./sdk/SDKCreator";
 
 var express = require('express');
 var graphqlHTTP = require('express-graphql');
 const cors = require('cors');
+var fs = require('fs');
 
 const pubsub = new PubSub();
 
@@ -20,6 +22,9 @@ const context = {
   models,
   pubsub
 };
+
+//Create SDK
+new SDKCreator().create();
 
 // Connect to MongoDB with Mongoose.
 mongoose

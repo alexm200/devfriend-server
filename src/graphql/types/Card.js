@@ -5,35 +5,32 @@ export default gql`
   scalar DateTime
   type Card {
     _id: String!
-    category: String!
-    user_id: String!
+    userId: String!
+    category: String!    
     title: String
     text: String
-    date_created: DateTime!
+    dateCreated: DateTime!
   }
-  type Query {
-    cardsByCategory(user_id: String!, category: String!): [Card]
-    cards: [Card!]!
+  type Query {    
+    cards(filters: Filters): [Card]
   }
   type Mutation {
-    createCard(card: CreateCardInput): Card!
-    updateCard(_id: String!, card: UpdateCardInput!): Card!
+    createCard(input: CardInput): Card!
+    updateCard(_id: String!, input: CardInput!): Card!
+    updateCards(_ids: [String!], inputs: [CardInput!]): Boolean
     deleteCard(_id: String!): Card!
     deleteCards: Boolean
   }
-  input CreateCardInput {
-    user_id: String!
-    category: String!
+  input Filters {
+    userId: String
+    category: String    
     title: String
-    text: String
-    date_created: DateTime!
-  }
-  input UpdateCardInput {
-    _id: String!
-    user_id: String!
-    category: String!
+    text: String    
+  }  
+  input CardInput {
+    userId: String
+    category: String
     title: String
-    text: String
-    date_created: DateTime!
+    text: String    
   }
 `;

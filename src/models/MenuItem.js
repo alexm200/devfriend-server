@@ -8,23 +8,31 @@ ObjectID.prototype.valueOf = function() {
 };
 
 export default mongoose.model(
-    "Card", 
+    "MenuItem", 
     new Schema({
         userId: {
             type: String,
             required: true
-        },
-        category: {
-            type: String,
-            required: true
-        },  
-        title: {
-            type: String,
-            required: false
-        },
+        },    
         text: {
-            type: String,    
+            type: String,
             required: false
+        },
+        isHeader: {
+            type: Boolean,
+            required: false
+        },        
+        hasDivider: {
+            type: Boolean,
+            required: false
+        },
+        icon: {
+            type: String,
+            required: false
+        },
+        order: {
+            type: Number,
+            required: true
         },
         dateCreated: {
             type: Date,

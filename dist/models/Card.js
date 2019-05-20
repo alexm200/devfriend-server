@@ -17,18 +17,22 @@ _mongodb.ObjectID.prototype.valueOf = function () {
   return this.toString();
 };
 
-var _default = _mongoose["default"].model("User", new Schema({
-  username: {
+var _default = _mongoose["default"].model("Card", new Schema({
+  userId: {
     type: String,
     required: true
   },
-  password: {
+  category: {
     type: String,
     required: true
   },
-  isAdmin: {
-    type: Boolean,
-    required: true
+  title: {
+    type: String,
+    required: false
+  },
+  text: {
+    type: String,
+    required: false
   },
   dateCreated: {
     type: Date,

@@ -13,12 +13,12 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _User = _interopRequireDefault(require("../../models/User"));
+var _MenuItem = require("../../models/MenuItem");
 
 var _default = {
   Query: {
-    users: function () {
-      var _users = (0, _asyncToGenerator2["default"])(
+    menuItems: function () {
+      var _menuItems = (0, _asyncToGenerator2["default"])(
       /*#__PURE__*/
       _regenerator["default"].mark(function _callee(parent, _ref, context, info) {
         var filters;
@@ -28,7 +28,9 @@ var _default = {
               case 0:
                 filters = _ref.filters;
                 _context.next = 3;
-                return _User["default"].find(filters).exec();
+                return MenuItem.find(filters).sort({
+                  order: 1
+                }).populate().exec();
 
               case 3:
                 return _context.abrupt("return", _context.sent);
@@ -41,16 +43,16 @@ var _default = {
         }, _callee);
       }));
 
-      function users(_x, _x2, _x3, _x4) {
-        return _users.apply(this, arguments);
+      function menuItems(_x, _x2, _x3, _x4) {
+        return _menuItems.apply(this, arguments);
       }
 
-      return users;
+      return menuItems;
     }()
   },
   Mutation: {
-    createUser: function () {
-      var _createUser = (0, _asyncToGenerator2["default"])(
+    createMenuItem: function () {
+      var _createMenuItem = (0, _asyncToGenerator2["default"])(
       /*#__PURE__*/
       _regenerator["default"].mark(function _callee2(parent, _ref2, context, info) {
         var input, newItem;
@@ -60,7 +62,7 @@ var _default = {
               case 0:
                 input = _ref2.input;
                 _context2.next = 3;
-                return new _User["default"](input);
+                return new MenuItem(input);
 
               case 3:
                 newItem = _context2.sent;
@@ -78,14 +80,14 @@ var _default = {
         }, _callee2);
       }));
 
-      function createUser(_x5, _x6, _x7, _x8) {
-        return _createUser.apply(this, arguments);
+      function createMenuItem(_x5, _x6, _x7, _x8) {
+        return _createMenuItem.apply(this, arguments);
       }
 
-      return createUser;
+      return createMenuItem;
     }(),
-    updateUser: function () {
-      var _updateUser = (0, _asyncToGenerator2["default"])(
+    updateMenuItem: function () {
+      var _updateMenuItem = (0, _asyncToGenerator2["default"])(
       /*#__PURE__*/
       _regenerator["default"].mark(function _callee3(parent, _ref3, context, info) {
         var _id, input;
@@ -96,10 +98,11 @@ var _default = {
               case 0:
                 _id = _ref3._id, input = _ref3.input;
                 return _context3.abrupt("return", new Promise(function (resolve, reject) {
-                  _User["default"].findByIdAndUpdate(_id, {
+                  MenuItem.findByIdAndUpdate(_id, {
                     $set: (0, _objectSpread2["default"])({}, input)
                   }, {
-                    "new": true
+                    "new": true,
+                    useFindAndModify: false
                   }).exec(function (err, res) {
                     err ? reject(err) : resolve(res);
                   });
@@ -113,14 +116,14 @@ var _default = {
         }, _callee3);
       }));
 
-      function updateUser(_x9, _x10, _x11, _x12) {
-        return _updateUser.apply(this, arguments);
+      function updateMenuItem(_x9, _x10, _x11, _x12) {
+        return _updateMenuItem.apply(this, arguments);
       }
 
-      return updateUser;
+      return updateMenuItem;
     }(),
-    deleteUser: function () {
-      var _deleteUser = (0, _asyncToGenerator2["default"])(
+    deleteMenuItem: function () {
+      var _deleteMenuItem = (0, _asyncToGenerator2["default"])(
       /*#__PURE__*/
       _regenerator["default"].mark(function _callee4(parent, _ref4, context, info) {
         var _id;
@@ -131,7 +134,7 @@ var _default = {
               case 0:
                 _id = _ref4._id;
                 return _context4.abrupt("return", new Promise(function (resolve, reject) {
-                  _User["default"].findByIdAndDelete(_id).exec(function (err, res) {
+                  MenuItem.findByIdAndDelete(_id).exec(function (err, res) {
                     err ? reject(err) : resolve(res);
                   });
                 }));
@@ -144,14 +147,14 @@ var _default = {
         }, _callee4);
       }));
 
-      function deleteUser(_x13, _x14, _x15, _x16) {
-        return _deleteUser.apply(this, arguments);
+      function deleteMenuItem(_x13, _x14, _x15, _x16) {
+        return _deleteMenuItem.apply(this, arguments);
       }
 
-      return deleteUser;
+      return deleteMenuItem;
     }(),
-    deleteUsers: function () {
-      var _deleteUsers = (0, _asyncToGenerator2["default"])(
+    deleteMenuItems: function () {
+      var _deleteMenuItems = (0, _asyncToGenerator2["default"])(
       /*#__PURE__*/
       _regenerator["default"].mark(function _callee5(parent, args, context, info) {
         return _regenerator["default"].wrap(function _callee5$(_context5) {
@@ -159,7 +162,7 @@ var _default = {
             switch (_context5.prev = _context5.next) {
               case 0:
                 return _context5.abrupt("return", new Promise(function (resolve, reject) {
-                  _User["default"].deleteMany().exec(function (err, res) {
+                  Card.deleteMany().exec(function (err, res) {
                     err ? reject(err) : resolve(res.ok);
                   });
                 }));
@@ -172,11 +175,11 @@ var _default = {
         }, _callee5);
       }));
 
-      function deleteUsers(_x17, _x18, _x19, _x20) {
-        return _deleteUsers.apply(this, arguments);
+      function deleteMenuItems(_x17, _x18, _x19, _x20) {
+        return _deleteMenuItems.apply(this, arguments);
       }
 
-      return deleteUsers;
+      return deleteMenuItems;
     }()
   }
 };
